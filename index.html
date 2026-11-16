@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patchwork - Productivity Suite</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="patchwork-header">
+        <h1 class="logo">🧩 Patchwork</h1>
+    </header>
+
+    <nav class="tab-navigation">
+        <button class="tab-btn active" data-tab="notes">
+            📝 Notes
+        </button>
+        <button class="tab-btn" data-tab="pomodoro">
+            🍅 Pomodoro
+        </button>
+        <button class="tab-btn" data-tab="kanban">
+            📋 Kanban
+        </button>
+        <button class="tab-btn" data-tab="flashcards">
+            🃏 Flashcards
+        </button>
+    </nav>
+
+    <main class="main-content">
+        <!-- Notes Tab Panel -->
+        <section class="tab-panel active" id="notes" data-tab="notes">
+            <div class="patchwork-container notes-layout">
+                <div class="patchwork-panel editor-panel">
+                    <h2>📝 Editor</h2>
+                    <textarea class="markdown-editor" id="markdownInput" placeholder="# Write your notes here...&#10;&#10;Write in Markdown and see the preview live!"></textarea>
+                </div>
+                <div class="patchwork-panel preview-panel">
+                    <h2>👁️ Preview</h2>
+                    <div class="markdown-preview" id="markdownPreview"></div>
+                </div>
+            </div>
+            <div class="patchwork-footer">
+                <span id="saveTimestamp">Last saved: Never</span>
+            </div>
+        </section>
+
+        <!-- Pomodoro Tab Panel -->
+        <section class="tab-panel" id="pomodoro" data-tab="pomodoro">
+            <div class="patchwork-container pomodoro-panel">
+                <h2>🍅 Pomodoro Timer</h2>
+                <div class="timer-display">
+                    <div class="timer-circle">
+                        <span class="timer-time" id="timerTime">25:00</span>
+                    </div>
+                    <div class="phase-indicator" id="phaseIndicator">Work Phase</div>
+                </div>
+                <div class="controls">
+                    <button class="patchwork-btn" id="startBtn">▶ Start</button>
+                    <button class="patchwork-btn" id="pauseBtn">⏸ Pause</button>
+                    <button class="patchwork-btn" id="resetBtn">↻ Reset</button>
+                </div>
+                <div class="cycle-counter">
+                    <span class="cycles-display">Cycles: <span id="cycleCount">0</span></span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Kanban Tab Panel -->
+        <section class="tab-panel" id="kanban" data-tab="kanban">
+            <div class="patchwork-container kanban-board">
+                <div class="patchwork-panel add-task-panel">
+                    <h3>➕ Add New Task</h3>
+                    <div class="add-task-form">
+                        <input type="text" id="taskTitle" placeholder="Task title" required>
+                        <textarea id="taskDescription" placeholder="Description (optional)"></textarea>
+                        <button class="patchwork-btn" id="addTaskBtn">Add Task</button>
+                    </div>
+                </div>
+                <div class="kanban-columns">
+                    <div class="kanban-column" id="todoColumn" data-column="todo">
+                        <h3>📌 To Do</h3>
+                        <div class="column-content" data-column="todo"></div>
+                    </div>
+                    <div class="kanban-column" id="doingColumn" data-column="doing">
+                        <h3>⚡ Doing</h3>
+                        <div class="column-content" data-column="doing"></div>
+                    </div>
+                    <div class="kanban-column" id="doneColumn" data-column="done">
+                        <h3>✅ Done</h3>
+                        <div class="column-content" data-column="done"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Flashcards Tab Panel -->
+        <section class="tab-panel" id="flashcards" data-tab="flashcards">
+            <div class="patchwork-container flashcards-panel">
+                <div class="flashcards-header">
+                    <h2>🃏 Flashcards</h2>
+                    <div class="deck-selector">
+                        <select id="deckSelect"></select>
+                        <button class="patchwork-btn" id="addDeckBtn">+ Deck</button>
+                        <button class="patchwork-btn" id="deleteDeckBtn" disabled>🗑️ Delete</button>
+                    </div>
+                </div>
+                <div class="flashcards-content">
+                    <div class="card-deck-list" id="cardDeckList">
+                        <h3>Deck Cards</h3>
+                        <div class="add-card-form">
+                            <input type="text" id="cardFront" placeholder="Front (Question)">
+                            <textarea id="cardBack" placeholder="Back (Answer)"></textarea>
+                            <button class="patchwork-btn" id="addCardBtn">+ Add Card</button>
+                        </div>
+                        <ul class="card-list" id="cardList"></ul>
+                    </div>
+                    <div class="review-mode-panel">
+                        <h3>Review Mode</h3>
+                        <div class="flashcard-container">
+                            <div class="flashcard" id="flashcard">
+                                <div class="flashcard-front" id="flashcardFront"></div>
+                                <div class="flashcard-back" id="flashcardBack"></div>
+                            </div>
+                        </div>
+                        <div class="review-controls">
+                            <button class="patchwork-btn" id="prevCardBtn" disabled>⬅️ Previous</button>
+                            <button class="patchwork-btn" id="flipCardBtn">➕ Flip</button>
+                            <button class="patchwork-btn" id="nextCardBtn" disabled>➡️ Next</button>
+                        </div>
+                        <div class="review-stats">
+                            <span>Known: <span id="knownCount">0</span></span>
+                            <span>Unknown: <span id="unknownCount">0</span></span>
+                            <span>Remaining: <span id="remainingCount">0</span></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="app.js"></script>
+</body>
+</html>

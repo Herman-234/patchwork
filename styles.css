@@ -1,0 +1,574 @@
+/* Patchwork Theme - CSS Variables */
+:root {
+    /* Primary colors - patchwork quilt palette */
+    --color-bg: #fff8e7;
+    --color-surface: #ffffff;
+    --color-primary: #ff6b6b;
+    --color-secondary: #4ecdc4;
+    --color-accent: #ffe66d;
+    --color-text: #2d3436;
+    --color-border: #dfe6e9;
+    --color-success: #6ab04c;
+    --color-danger: #eb4d4b;
+    --color-warning: #f0932b;
+    
+    /* Patchwork-specific */
+    --stitch-color: #555;
+    --stitch-spacing: 4px;
+    --stitch-size: 2px;
+    --corner-radius: 8px;
+    --padding: 20px;
+    --spacing: 16px;
+    
+    /* Font families */
+    --font-body: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    --font-heading: 'Georgia', serif;
+}
+
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-body);
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    line-height: 1.6;
+    min-height: 100vh;
+}
+
+/* Patchwork Container Style */
+.patchwork-container,
+.patchwork-panel {
+    background-color: var(--color-surface);
+    border: var(--stitch-size) dashed var(--stitch-color);
+    border-radius: var(--corner-radius);
+    padding: var(--padding);
+    margin: var(--spacing);
+    box-shadow: 3px 3px 0px rgba(0,0,0,0.1);
+}
+
+/* Header */
+.patchwork-header {
+    text-align: center;
+    padding: 20px;
+    background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+    border-radius: var(--corner-radius);
+    margin-bottom: var(--spacing);
+}
+
+.patchwork-header .logo {
+    color: white;
+    font-family: var(--font-heading);
+    font-size: 2rem;
+}
+
+/* Tab Navigation */
+.tab-navigation {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    padding: 20px;
+    background-color: var(--color-surface);
+    border-radius: var(--corner-radius);
+    margin-bottom: var(--spacing);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.tab-btn {
+    padding: 12px 24px;
+    font-size: 1rem;
+    font-family: var(--font-body);
+    background: linear-gradient(135deg, var(--color-secondary), #3dbdb4);
+    color: white;
+    border: none;
+    border-radius: var(--corner-radius);
+    cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: 0 3px 0 rgba(0,0,0,0.2);
+}
+
+.tab-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 0 rgba(0,0,0,0.2);
+}
+
+.tab-btn.active {
+    background: linear-gradient(135deg, var(--color-primary), #e55a5a);
+    box-shadow: 0 3px 0 rgba(0,0,0,0.2);
+    font-weight: bold;
+}
+
+/* Main Content */
+.main-content {
+    padding: var(--padding);
+}
+
+/* Tab Panels */
+.tab-panel {
+    display: none;
+}
+
+.tab-panel.active {
+    display: block;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Notes Section */
+.notes-layout {
+    display: flex;
+    gap: var(--spacing);
+    flex-wrap: wrap;
+}
+
+.editor-panel,
+.preview-panel {
+    flex: 1;
+    min-width: 300px;
+}
+
+.markdown-editor {
+    width: 100%;
+    height: 400px;
+    padding: var(--padding);
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    border: var(--stitch-size) dashed var(--stitch-color);
+    border-radius: var(--corner-radius);
+    resize: vertical;
+    background: #fff;
+    color: var(--color-text);
+}
+
+.markdown-editor:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--color-secondary);
+}
+
+.markdown-preview {
+    width: 100%;
+    height: 400px;
+    overflow-y: auto;
+    padding: var(--padding);
+    background: #fafafa;
+}
+
+.markdown-preview h1 { font-size: 2em; border-bottom: 1px dashed var(--stitch-color); padding-bottom: 10px; }
+.markdown-preview h2 { font-size: 1.5em; border-bottom: 1px dashed var(--stitch-color); padding-bottom: 8px; }
+.markdown-preview h3 { font-size: 1.25em; }
+.markdown-preview code {
+    background: #f4f4f4;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: monospace;
+}
+.markdown-preview pre {
+    background: #f4f4f4;
+    padding: 10px;
+    border-radius: 4px;
+    overflow-x: auto;
+}
+.markdown-preview pre code {
+    background: none;
+    padding: 0;
+}
+.markdown-preview blockquote {
+    border-left: 4px dashed var(--stitch-color);
+    margin: 0;
+    padding-left: 15px;
+    color: #666;
+}
+
+/* Pomodoro Section */
+.pomodoro-panel {
+    text-align: center;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.timer-display {
+    margin: 30px 0;
+}
+
+.timer-circle {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--color-primary), #e55a5a);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    border: var(--stitch-size) dashed var(--stitch-color);
+    box-shadow: 0 0 0 8px rgba(255,107,107,0.1);
+}
+
+.timer-time {
+    font-size: 4rem;
+    font-weight: bold;
+    color: white;
+    font-family: 'Courier New', monospace;
+}
+
+.phase-indicator {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--color-text);
+}
+
+.controls {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 20px 0;
+}
+
+.cycle-counter {
+    font-size: 1.1rem;
+    color: var(--color-text);
+}
+
+/* Kanban Section */
+.kanban-board {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing);
+}
+
+.add-task-panel {
+    margin-bottom: var(--spacing);
+}
+
+.add-task-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.add-task-form input,
+.add-task-form textarea {
+    padding: 10px;
+    border: var(--stitch-size) dashed var(--stitch-color);
+    border-radius: var(--corner-radius);
+    font-family: var(--font-body);
+}
+
+.add-task-form textarea {
+    height: 60px;
+    resize: vertical;
+}
+
+.kanban-columns {
+    display: flex;
+    gap: var(--spacing);
+    overflow-x: auto;
+}
+
+.kanban-column {
+    flex: 1;
+    min-width: 280px;
+}
+
+.kanban-column h3 {
+    padding: 10px;
+    background: var(--color-bg);
+    margin: -20px -20px 10px -20px;
+    border-bottom: var(--stitch-size) dashed var(--stitch-color);
+}
+
+.column-content {
+    min-height: 200px;
+    padding: 10px;
+}
+
+.kanban-column.drag-over .column-content {
+    background: rgba(78, 205, 196, 0.2);
+    border-radius: var(--corner-radius);
+}
+
+.kanban-card {
+    background: var(--color-surface);
+    border: 2px dashed var(--stitch-color);
+    border-radius: var(--corner-radius);
+    padding: 15px;
+    margin-bottom: 10px;
+    cursor: grab;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.kanban-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 3px 3px 5px rgba(0,0,0,0.15);
+}
+
+.kanban-card.dragging {
+    opacity: 0.8;
+    cursor: grabbing;
+}
+
+.kanban-card h4 {
+    margin-bottom: 8px;
+    color: var(--color-text);
+}
+
+.kanban-card p {
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.kanban-card-actions {
+    display: flex;
+    gap: 5px;
+    margin-top: 10px;
+}
+
+.kanban-card button {
+    padding: 4px 8px;
+    font-size: 0.8rem;
+    border: 1px solid var(--stitch-color);
+    border-radius: 4px;
+    cursor: pointer;
+    background: white;
+}
+
+/* Flashcards Section */
+.flashcards-panel {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing);
+}
+
+.flashcards-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.deck-selector {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.deck-selector select {
+    padding: 10px;
+    border: var(--stitch-size) dashed var(--stitch-color);
+    border-radius: var(--corner-radius);
+    font-family: var(--font-body);
+    min-width: 200px;
+}
+
+.flashcards-content {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing);
+}
+
+.card-deck-list {
+    flex: 1;
+    min-width: 300px;
+}
+
+.card-deck-list h3 {
+    margin-bottom: 10px;
+}
+
+.add-card-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.add-card-form input,
+.add-card-form textarea {
+    padding: 10px;
+    border: var(--stitch-size) dashed var(--stitch-color);
+    border-radius: var(--corner-radius);
+}
+
+.card-list {
+    list-style: none;
+}
+
+.card-list li {
+    padding: 10px;
+    background: var(--color-surface);
+    border: var(--stitch-size) dashed var(--stitch-color);
+    border-radius: var(--corner-radius);
+    margin-bottom: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card-list button {
+    padding: 4px 8px;
+    font-size: 0.8rem;
+    border: 1px solid var(--stitch-color);
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.review-mode-panel {
+    flex: 1;
+    min-width: 300px;
+    text-align: center;
+}
+
+.flashcard-container {
+    perspective: 1000px;
+    margin: 30px 0;
+}
+
+.flashcard {
+    width: 300px;
+    height: 200px;
+    margin: 0 auto;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.6s;
+    cursor: pointer;
+}
+
+.flashcard.flipped {
+    transform: rotateY(180deg);
+}
+
+.flashcard-front,
+.flashcard-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    border: var(--stitch-size) dashed var(--stitch-color);
+    border-radius: var(--corner-radius);
+    font-size: 1.2rem;
+    text-align: center;
+    background: white;
+}
+
+.flashcard-front {
+    color: var(--color-text);
+}
+
+.flashcard-back {
+    transform: rotateY(180deg);
+    background: var(--color-accent);
+    color: var(--color-text);
+}
+
+.review-controls {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 20px 0;
+}
+
+.review-stats {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    font-size: 1rem;
+}
+
+.review-stats span {
+    padding: 8px 16px;
+    border-radius: var(--corner-radius);
+    background: var(--color-surface);
+    border: var(--stitch-size) dashed var(--stitch-color);
+}
+
+/* Patchwork Buttons */
+.patchwork-btn {
+    padding: 10px 20px;
+    font-size: 1rem;
+    font-family: var(--font-body);
+    background: var(--color-primary);
+    color: white;
+    border: none;
+    border-radius: var(--corner-radius);
+    cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: 0 3px 0 rgba(0,0,0,0.2);
+}
+
+.patchwork-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 0 rgba(0,0,0,0.2);
+}
+
+.patchwork-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 0 rgba(0,0,0,0.2);
+}
+
+.patchwork-btn.secondary {
+    background: var(--color-secondary);
+}
+
+.patchwork-btn.danger {
+    background: var(--color-danger);
+}
+
+.patchwork-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Footer */
+.patchwork-footer {
+    padding: 10px;
+    text-align: center;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .notes-layout,
+    .kanban-columns,
+    .flashcards-content {
+        flex-direction: column;
+    }
+    
+    .tab-navigation {
+        padding: 10px;
+    }
+    
+    .tab-btn {
+        padding: 10px 16px;
+        font-size: 0.9rem;
+    }
+    
+    .patchwork-header .logo {
+        font-size: 1.5rem;
+    }
+    
+    .flashcard {
+        width: 100%;
+        max-width: 300px;
+        height: 180px;
+    }
+}
+
+/* Accessible Focus States */
+*:focus-visible {
+    outline: 3px solid var(--color-secondary);
+    outline-offset: 2px;
+}
