@@ -388,7 +388,7 @@ function renderKanban(data) {
         columnContent.innerHTML = '';
         
         columns[columnId]?.forEach(task => {
-            const card = createTaskCard(task);
+            const card = createTaskCard(task, columnId);
             columnContent.appendChild(card);
         });
     });
@@ -414,20 +414,36 @@ function handleDragEnd(e) {
     });
 }
 
-function createTaskCard(task) {
+function createTaskCard(task, columnId) {
     const card = document.createElement('div');
     card.className = 'kanban-card';
     card.draggable = true;
     card.dataset.taskId = task.id;
     
+    // Move buttons (tap to move between columns — drag does not work on touch screens)
+    const columnOrder = ['todo', 'doing', 'done'];
+    const currentIndex = columnOrder.indexOf(columnId);
+    const prevColumn = currentIndex > 0 ? columnOrder[currentIndex - 1] : null;
+    const nextColumn = currentIndex < columnOrder.length - 1 ? columnOrder[currentIndex + 1] : null;
+    
     card.innerHTML = `
         <h4>${escapeHtml(task.title)}</h4>
         ${task.description ? `<p>${escapeHtml(task.description)}</p>` : ''}
         <div class="kanban-card-actions">
+            ${prevColumn ? `<button class="move-btn" data-task-id="${task.id}" data-target="${prevColumn}" title="Move left">◀</button>` : ''}
+            ${nextColumn ? `<button class="move-btn" data-task-id="${task.id}" data-target="${nextColumn}" title="Move right">▶</button>` : ''}
             <button class="edit-btn" data-task-id="${task.id}">✏️ Edit</button>
             <button class="delete-btn" data-task-id="${task.id}">🗑️ Delete</button>
         </div>
     `;
+    
+    // Move buttons
+    card.querySelectorAll('.move-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            moveTaskToColumn(task.id, btn.dataset.target);
+        });
+    });
     
     // Edit button
     card.querySelector('.edit-btn').addEventListener('click', (e) => {
