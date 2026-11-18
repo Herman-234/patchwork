@@ -394,6 +394,26 @@ function renderKanban(data) {
     });
 }
 
+// Shared drag-and-drop state and handlers (top-level so createTaskCard can use them)
+let draggedElement = null;
+
+function handleDragStart(e) {
+    draggedElement = this;
+    this.classList.add('dragging');
+    e.dataTransfer.effectAllowed = 'move';
+    e.dataTransfer.setData('text/plain', this.dataset.taskId);
+}
+
+function handleDragEnd(e) {
+    this.classList.remove('dragging');
+    draggedElement = null;
+    
+    // Remove drag-over classes
+    document.querySelectorAll('.kanban-column').forEach(col => {
+        col.classList.remove('drag-over');
+    });
+}
+
 function createTaskCard(task) {
     const card = document.createElement('div');
     card.className = 'kanban-card';
@@ -501,25 +521,6 @@ function deleteTask(taskId) {
 }
 
 function setupDragAndDrop() {
-    let draggedElement = null;
-    
-    function handleDragStart(e) {
-        draggedElement = this;
-        this.classList.add('dragging');
-        e.dataTransfer.effectAllowed = 'move';
-        e.dataTransfer.setData('text/plain', this.dataset.taskId);
-    }
-    
-    function handleDragEnd(e) {
-        this.classList.remove('dragging');
-        draggedElement = null;
-        
-        // Remove drag-over classes
-        document.querySelectorAll('.kanban-column').forEach(col => {
-            col.classList.remove('drag-over');
-        });
-    }
-    
     // Attach to existing cards
     document.querySelectorAll('.kanban-card').forEach(card => {
         card.addEventListener('dragstart', handleDragStart);
