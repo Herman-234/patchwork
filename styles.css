@@ -359,6 +359,7 @@ body {
     display: flex;
     gap: 10px;
     align-items: center;
+    flex-wrap: wrap;
 }
 
 .deck-selector select {
@@ -367,6 +368,7 @@ body {
     border-radius: var(--corner-radius);
     font-family: var(--font-body);
     min-width: 200px;
+    flex: 1;
 }
 
 .flashcards-content {
