@@ -632,6 +632,8 @@ function initFlashcards() {
     document.getElementById('flipCardBtn').addEventListener('click', flipCard);
     document.getElementById('prevCardBtn').addEventListener('click', prevCard);
     document.getElementById('nextCardBtn').addEventListener('click', nextCard);
+    document.getElementById('knownBtn').addEventListener('click', markKnown);
+    document.getElementById('unknownBtn').addEventListener('click', markUnknown);
 }
 
 function renderDeckSelector() {
@@ -848,6 +850,25 @@ function updateFlashcardDisplay() {
 function flipCard() {
     const flashcard = document.getElementById('flashcard');
     flashcard.classList.toggle('flipped');
+}
+
+function markKnown() {
+    if (flashcards.cards.length === 0) return;
+    flashcards.knownCount++;
+    advanceAfterMark();
+}
+
+function markUnknown() {
+    if (flashcards.cards.length === 0) return;
+    flashcards.unknownCount++;
+    advanceAfterMark();
+}
+
+function advanceAfterMark() {
+    if (flashcards.currentCardIndex < flashcards.cards.length - 1) {
+        flashcards.currentCardIndex++;
+    }
+    updateFlashcardDisplay();
 }
 
 function prevCard() {
